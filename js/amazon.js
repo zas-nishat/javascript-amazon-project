@@ -125,6 +125,13 @@ document.querySelectorAll(".add-to-cart-button").forEach((button) => {
       )
     }
 
+    const totalQuantity = document.querySelector(".cart-quantity");
+    let cartsQuantity = 0;
+    carts.forEach((quantity) => {
+      cartsQuantity += quantity.quantity;
+      totalQuantity.innerHTML = cartsQuantity;
+    });
+    console.log("total quantity:" + cartsQuantity)
     console.log(carts)
   })
 })
