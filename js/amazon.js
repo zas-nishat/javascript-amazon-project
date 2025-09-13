@@ -1,3 +1,6 @@
+import { carts } from "../js/carts.js"
+
+
 const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -105,13 +108,15 @@ products.forEach((product) => {
   document.querySelector(".show-products").innerHTML = productHtml;
 })
 
-document.querySelectorAll(".add-to-cart-button").forEach((button) => {
+
+const addcartBtn = document.querySelectorAll(".add-to-cart-button");
+addcartBtn.forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
     let matchedProducts;
     carts.forEach((item) => {
       if (productId === item.productId) {
-        matchedProducts = item
+        matchedProducts = item;
       }
     })
     if (matchedProducts) {
