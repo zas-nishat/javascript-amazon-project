@@ -1,20 +1,23 @@
 import { carts, updateCartsQuantity, addToCart } from '../js/carts.js';
 import { products } from '../data/products.js';
+import { convertCurrency } from "../utils/money.js";
 
 
 let cartSummeryHtml = '';
 carts.forEach((cartIem) => {
-    const productId = cartIem.productId;
+  const productId = cartIem.productId;
 
-    let matchingItem;
+  let matchingItem = products.find(product => product.id === productId);
 
-    products.forEach((product) => {
-        if (product.id === productId) {
-            matchingItem = product;
-        }
-    });
+
+  products.forEach((product) => {
+    if (product.id === productId) {
+      matchingItem = product;
+    }
+  });
+  if (matchingItem) {
     cartSummeryHtml +=
-        `  <div class="cart-item-container">
+      `  <div class="cart-item-container">
             <div class="delivery-date">
               Delivery date: Tuesday, June 21
             </div>
@@ -28,7 +31,7 @@ carts.forEach((cartIem) => {
                   ${matchingItem.name}
                 </div>
                 <div class="product-price">
-                  $${matchingItem.priceCents / 100}
+                  $${convertCurrency(matchingItem.priceCents)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -89,10 +92,11 @@ carts.forEach((cartIem) => {
               </div>
             </div>
           </div>`;
+  }
 });
 
 document.querySelector(".js-order-summary").innerHTML = cartSummeryHtml;
-updateCartsQuantity()
+updateCartsQuantity();
 
 
 
